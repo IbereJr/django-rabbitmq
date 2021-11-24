@@ -13,7 +13,8 @@ class RabbitMQ(object):
         channel = self.connection.channel()
         channel.queue_declare(queue=queue)
 
-        channel.basic_consume(queue=queue, on_message_callback=self.callback, auto_ack=True)
+        #channel.basic_consume(queue=queue, on_message_callback=self.callback, auto_ack=True)
+        channel.basic_consume(queue=queue, self.callback, auto_ack=True)
 
         print('[django-rabbitmq] Waiting for messages. To exit press CTRL+C')
         channel.start_consuming()
